@@ -1,0 +1,48 @@
+#punchline{
+    margin-top: 10px !important;
+}
+
+#identity_form{
+    padding: 25px;
+    margin: 25px;
+    text-align: center;
+    border-radius: 25px !important;
+}
+
+header.masthead{
+    background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../img/bg_header.jpg");
+}
+
+#awe a{
+    color: white;
+}
+
+.form-inline{
+    display: block;
+    margin: 20px auto 20px auto;
+}
+
+.form-inline input{
+    padding: 25px;
+    text-align: center;
+    border-radius: 25px !important;
+}
+
+.navbar-dark{
+    background-color: #ffffff;
+    color: #000000;
+}
+.navbar-dark .navbar-brand{
+    color: #000000;
+}
+
+.navbar-dark .nav-item .nav-link{
+    color: #000000;
+}
+.navbar-dark .nav-item .nav-link:hover{
+    color: #F45C39;
+}
+
+.text-red{
+    color: #cc0000 !important;
+}
