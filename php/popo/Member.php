@@ -27,6 +27,25 @@ class Member
         return $stmt;
     }
 
+    public function store(){
+        $stmt = $this->connection->prepare('INSERT INTO member (id, name, address, birthdate, occupation) VALUES (:fid, :namer, :faddress, :fbirthdate, :foccupation)');
+
+        $bool = $stmt->execute([
+            'fid' => $this->id,
+            'namer' => $this->name,
+            'faddress' => $this->address,
+            'fbirthdate' => $this->birthdate,
+            'foccupation' => $this->occupation
+        ]);
+
+        if($bool){
+            return true;
+        }else{
+            error_log("Error message: " . $stmt->errorCode() . " ID : " . $this->id, 3, "/var/log/nginx/error.log");
+            return false;
+        }
+    }
+
     /**
      * @return mixed
      */

@@ -44,7 +44,7 @@
                     <a class="nav-link js-scroll-trigger" href="#services">Daftar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#services">Daftar Tamu</a>
+                    <a class="nav-link js-scroll-trigger" href="#services">Cari Buku</a>
                 </li>
             </ul>
         </div>
@@ -55,22 +55,22 @@
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-10 offset-1 mb-5">
-                <form>
+                <form method="POST" action="php/api/register.php">
                     <div class="form-group" id="register_name_form">
                         <label for="register_name_form_input">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="register_name_form_input" name="name" placeholder="Nama Lengkap">
+                        <input type="text" class="form-control" id="register_name_form_input" name="name" placeholder="Nama Lengkap" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$">
                     </div>
                     <div class="form-group" id="register_address_form">
                         <label for="register_address_form_input">Alamat</label>
-                        <input type="text" class="form-control" id="register_address_form_input" name="address" placeholder="Alamat">
+                        <input type="text" class="form-control" id="register_address_form_input" name="address" placeholder="Alamat" required minlength="6">
                     </div>
                     <div class="form-group" id="register_birthdate_form">
                         <label for="register_address_form_input">Tanggal Lahir</label>
-                        <input type="date" class="form-control" id="register_birthdate_form_input" name="birthdate" placeholder="Tanggal Lahir">
+                        <input type="date" class="form-control" id="register_birthdate_form_input" name="birthdate" placeholder="Tanggal Lahir" required>
                     </div>
                     <div class="form-group" id="register_occupation_form">
                         <label for="register_address_form_input">Pekerjaan</label>
-                        <input type="text" class="form-control" id="register_occupation_form_input" name="Occupation" placeholder="Pekerjaan">
+                        <input type="text" class="form-control" id="register_occupation_form_input" name="occupation" placeholder="Pekerjaan" required>
                     </div>
 
                     <button type="submit" class="btn btn-danger">Submit</button>
