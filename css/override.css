@@ -43,6 +43,85 @@ header.masthead{
     color: #F45C39;
 }
 
+.navbar-dark a:hover{
+    color: #F45C39 !important;
+}
+
 .text-red{
     color: #cc0000 !important;
 }
+
+p.book_title{
+    font-style: oblique;
+    font-size: 22px;
+}
+
+p.book_desc{
+    font-weight: lighter;
+    font-size: 18px;
+}
+
+table td{
+    vertical-align: center;
+    text-align: center;
+}
+
+.book_det div img{
+    vertical-align: center;
+    display: inline;
+    float: left;
+}
+
+.book_det div a{
+    vertical-align: middle;
+}
+
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+input.search {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+}
+input[type=text].search {
+    background-color: #f1f1f1;
+    width: 100%;
+}
+input[type=button].search {
+    background-color: DodgerBlue;
+    color: #fff;
+}
+.search-form{
+    box-sizing: border-box;
+}
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
