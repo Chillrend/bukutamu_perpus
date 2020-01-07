@@ -1,34 +1,71 @@
 
 
-function autocomplete(inp, arr) {
+function autocomplete(inp) {
 
-    let focus;
+    var focus;
     inp.addEventListener("input", function(e) {
-        let elem, b, i, val = this.value;
+        var elem, b, i, val = this.value;
+        var elemid = this.id;
         closeAllLists();
-        if (!val) { return false;}
-        focus = -1;
-        elem = document.createElement("DIV");
-        elem.setAttribute("id", this.id + "autocomplete-list");
-        elem.setAttribute("class", "autocomplete-items");
-        this.parentNode.appendChild(elem);
-        for (i = 0; i < arr.length; i++) {
-            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                //Kasih click listener di variable b, kalo di klik ambil data pake ajax, tros datanya tampilin di detail buku paling atas, PIKIR NDIRI
-                b = document.createElement("DIV");
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                b.innerHTML += arr[i].substr(val.length);
-                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                b.addEventListener("click", function(e) {
-                    //TARO AJAX CALL BUAT AMBIL DETAIL BUKU DISINI
+        if (val.length < 3) { return false;}
 
-                    inp.value = this.getElementsByTagName("input")[0].value;
+        let xmlhttp = new XMLHttpRequest();
 
-                    closeAllLists();
-                });
-                elem.appendChild(b);
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var myObj = JSON.parse(this.responseText);
+
+                focus = -1;
+                elem = document.createElement("DIV");
+                elem.setAttribute("id", e.target.id + "autocomplete-list");
+                elem.setAttribute("class", "autocomplete-items");
+
+                var dom = document.getElementById(e.target.id);
+                dom.parentNode.appendChild(elem);
+                for (i = 0; i < myObj.length; i++) {
+                    
+                        //Kasih click listener di variabl e b, kalo di klik ambil data pake ajax, tros datanya tampilin di detail buku paling atas, PIKIR NDIRI
+                        b = document.createElement("DIV");
+                        b.innerHTML = "<i>" + myObj[i]['title'] + "</i>";
+                        b.innerHTML += "<input type='hidden' value='" + myObj[i]['id'] + "'>";
+                        b.addEventListener("click", function(e) {
+                            //TARO AJAX CALL BUAT AMBIL DETAIL BUKU DISINI
+                            console.log(this.getElementsByTagName("i"))
+                            inp.value = this.getElementsByTagName("i")[0].innerHTML;
+                            let id = this.getElementsByTagName("input")[0].value; 
+                            console.log(id);
+
+                            closeAllLists();
+
+                            let xhr = new XMLHttpRequest();
+                            xhr.open("POST", "php/api/readbooktable.php");
+                            xhr.onreadystatechange = function() {
+                                if (this.readyState == 4 && this.status == 200) {
+                                    console.log(this.responseText);
+                                    let myObj = JSON.parse(this.responseText);
+                                    document.getElementById("vtitle").innerHTML = myObj[0]['title'];
+                                    document.getElementById("vwriter").innerHTML = myObj[0]['writer'];
+                                    document.getElementById("vyear").innerHTML = myObj[0]['pub_year'];
+                                    document.getElementById("visbn").innerHTML = myObj[0]['isbn_issn'];
+                                    document.getElementById("vgenre").innerHTML = myObj[0]['genre'];
+                                    document.getElementById("vlocation").innerHTML = myObj[0]['location'];
+                                    document.getElementById("vimage").src = "img/cover/" + myObj[0]['image'];   
+                                }
+                            }
+                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            let params = "id=" + id;
+                            xhr.send(params);
+                        });
+                        elem.appendChild(b);
+                }
             }
         }
+
+        xmlhttp.open("POST", "php/api/readbook.php", true);
+        xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        let params = "search=" + val; 
+        xmlhttp.send(params);
+
     });
 
     inp.addEventListener("keydown", function(e) {
@@ -71,6 +108,7 @@ function autocomplete(inp, arr) {
             x[i].classList.remove("autocomplete-active");
         }
     }
+
     function closeAllLists(elmnt) {
         // Tutup semua list item kecuali yang dikasih lewat arg
         var x = document.getElementsByClassName("autocomplete-items");
@@ -86,9 +124,6 @@ function autocomplete(inp, arr) {
     });
 }
 
-//Ambil variable ini via AJAX bentuk JSON, pikir ndiri. Modelnya HARUS persis kaya gini, atau bikin method sendiri.
-var buku = ["Conway's All the World's Fighting Ships", "Kama Sutra", "The Holy Book", "Bealdor's Secret"];
-
 //AJAX harus dipanggil SETIAP KALI user ngetik satu huruf untuk ganti array, ganti argumen kedua dengan ARRAY yang diambil dari AJAX
 //Habis AJAX Request selesai, panggil
-autocomplete(document.getElementById("myInput"), buku);
+autocomplete(document.getElementById("myInput"));

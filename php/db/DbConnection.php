@@ -5,8 +5,8 @@ class DbConnection
 {
 
     private $host = "localhost";
-    private $username = "fuckuphpmyadmin";
-    private $password = "fuckpass";
+    private $username = "wawa";
+    private $password = "bastard423";
     private $database = "perpus";
 
     public $connection;

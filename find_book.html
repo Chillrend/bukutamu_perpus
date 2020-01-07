@@ -61,15 +61,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="https://images-na.ssl-images-amazon.com/images/I/5140-kQPK6L._SX347_BO1,204,203,200_.jpg"
+                        <img id="vimage" src="https://images-na.ssl-images-amazon.com/images/I/5140-kQPK6L._SX347_BO1,204,203,200_.jpg"
                              width="200" height="300" alt="cover">
                     </div>
                     <div class="col-md-8">
-                        <p class="book_title">Conway's All The World's Fighting Ships (1922-1946)</p>
-                        <p class="book_desc"><i class="fas fa-user mr-3"></i>Richard Conway</p>
-                        <p class="book_desc"><i class="fas fa-calendar mr-3"></i>2008</p>
-                        <p class="book_desc"><i class="fas fa-barcode mr-3"></i><strong>ISBN</strong> 123132131123</p>
-                        <p class="book_desc"><i class="fas fa-book mr-3"></i><strong>Genre :</strong> Sejarah</p>
+                        <p id="vtitle" class="book_title"> Silahkan Mencari di Kolom Pencarian</p>
+                        <p  class="book_desc"><i class="fas fa-user mr-3"></i><span id="vwriter">Penulis</span></p>
+                        <p  class="book_desc"><i class="fas fa-calendar mr-3"></i><span  id="vyear">Tahun Terbit</span></p>
+                        <p  class="book_desc"><i class="fas fa-barcode mr-3"></i><strong>ISBN</strong><span id="visbn"></span></p>
+                        <p class="book_desc"><i class="fas fa-book mr-3"></i><strong>Genre :</strong><span id="vgenre"></span> </p>
+                        <p class="book_desc"><i class="fas fa-location-arrow mr-3"></i><strong>Location :</strong><span id="vlocation" ></span></p>
                     </div>
                 </div>
             </div>
@@ -77,7 +78,7 @@
         <div class="col-md-4 search-form">
             <form autocomplete="off" action="">
                 <div class="autocomplete">
-                    <input id="myInput" class="search" type="text" name="myCountry" placeholder="Nama Buku/Penulis/Genre">
+                    <input id="myInput" class="search" type="text" name="search" placeholder="Nama Buku/Penulis/Genre">
                 </div>
                 <input class="search" type="button" value="Search">
             </form>
@@ -104,13 +105,13 @@
                         <td class="book_det">
                             <div>
                                 <img src="https://images-na.ssl-images-amazon.com/images/I/5140-kQPK6L._SX347_BO1,204,203,200_.jpg" height="80" width="60" alt="">
-                                <a href="" onclick="alert("aweawe")">Conway's All the World's Fighting Ships</a>
+                                <a href="" id="title"></a>
                             </div>
                         </td>
-                        <td>Richard Conway</td>
-                        <td>2008</td>
-                        <td>123123123123</td>
-                        <td>Lt. 7 Sejarah/A6</td>
+                        <td id="writer"></td>
+                        <td id="year"></td>
+                        <td id="isbn"></td>
+                        <td id="location"></td>
                     </tr>
                 </tbody>
             </table>
@@ -137,6 +138,38 @@
 <script src="js/creative.min.js"></script>
 <script src="js/findbook.js"></script>
 
+<<!-- script type="text/javascript">
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+        var i;
+        var vtitle;
+        var vwriter;
+        var vyear;
+        var visbn;
+        var vlocation;
+        for (i = 0; i < myObj.length; i++) {
+            vtitle = myObj[i].title;
+            vwriter = myObj[i].writer;
+            vyear = myObj[i].pub_year;
+            visbn = myObj[i].isbn_issn;
+            vlocation = myObj[i].location;
+            vimage = myObj[i].image;
+            document.getElementById("title").innerHTML = vtitle;
+            document.getElementById("writer").innerHTML = vwriter;
+            document.getElementById("year").innerHTML = vyear;
+            document.getElementById("isbn").innerHTML = visbn;
+            document.getElementById("location").innerHTML = vlocation;
+            document.getElementById("")
+            }
+        
+        }
+    };
+    xmlhttp.open("GET", "php/api/readbook.php", true);
+    xmlhttp.send();
+</script>
+ -->
 </body>
 
 </html>
